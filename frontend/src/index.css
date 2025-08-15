@@ -1,0 +1,16 @@
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 0; color: #222; }
+.topbar { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; background:#f6f8fa; border-bottom:1px solid #e1e4e8; }
+.topbar a { margin-right:12px; text-decoration:none; color:#0366d6; }
+.navlinks { display:flex; align-items:center; gap:12px; }
+.link-button { background:transparent; border:1px solid #d1d5da; padding:6px 10px; border-radius:4px; cursor:pointer; }
+.username { margin-left:8px; font-weight:500; color:#333; }
+input, select, textarea { padding:8px; border:1px solid #ddd; border-radius:4px; margin:6px 0; width:100%; box-sizing: border-box; }
+button { padding:8px 12px; background:#0366d6; color:white; border:none; border-radius:6px; cursor:pointer; }
+button:disabled { opacity:0.6; cursor:not-allowed; }
+.container { padding:20px; max-width:900px; }
+.room-grid { display:flex; gap:20px; }
+.left { flex:1; }
+.right { width:340px; }
+.chat-box { height:320px; overflow:auto; border:1px solid #eee; padding:8px; border-radius:6px; background:#fff; }
+.message { padding:6px 4px; border-bottom:1px dashed #f1f1f1; }
+.small { font-size:13px; color:#666; }
