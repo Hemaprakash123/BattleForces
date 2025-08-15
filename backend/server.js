@@ -70,7 +70,23 @@ io.on('connection', (socket) => {
       // send basic state
       const host = await User.findById(room.host).lean();
       const guest = room.guest ? await User.findById(room.guest).lean() : null;
-      io.to(code).emit('room_state', { room, host: { id: host._id, name: host.name, username: host.username, cfUsername: host.cfUsername }, guest: guest ? { id: guest._id, name: guest.name, username: guest.username, cfUsername: guest.cfUsername } : null });
+      io.to(code).emit('room_state', { 
+        room, 
+        host: host ? { 
+          id: host._id, 
+          name: host.name, 
+          username: host.username, 
+          cfUsername: host.cfUsername,
+          cfRating: host.cfRating 
+        } : null, 
+        guest: guest ? { 
+          id: guest._id, 
+          name: guest.name, 
+          username: guest.username, 
+          cfUsername: guest.cfUsername,
+          cfRating: guest.cfRating 
+        } : null 
+      });
     } catch (err) { console.error(err); }
   });
 
@@ -88,8 +104,15 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat_message', ({ code, text }) => {
+    if (!text || text.trim().length === 0) return;
+      const host = data.host || {};
+      const guest = data.guest || null;
     User.findById(uid).then(u => {
-      io.to(code).emit('chat_message', { user: { id: u._id, username: u.username }, text, ts: Date.now() });
+      io.to(code).emit('chat_message', { 
+        user: { id: u._id, username: u.username, name: u.name }, 
+        text: text.trim(), 
+        ts: Date.now() 
+      });
     });
   });
 
